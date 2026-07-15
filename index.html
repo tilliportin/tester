@@ -153,10 +153,10 @@
 <body>
 
     <main class="container">
-        <h1>Heippa</h1>
+        <h1>Hei</h1>
 
         <p class="warning">
-            Sait linkistä viruksen
+            Sait linkistä viruksen. Vittu mieti sitä ens kerralla ennen kun avaat random linkkejä 
         </p>
 
         <img
@@ -202,144 +202,145 @@
     </div>
 
     <script>
-        "use strict";
+"use strict";
 
-        const instructions = [
-            "Tarjoa siemeniä ennen kuin tarjoat mielipiteitä.",
-            "Älä mainitse sanaa \"rauhoitu\". Se pahentaa tilannetta.",
-            "Älä. Koske. Hätävarastoon.",
-            "Pakkaa tavarasi ja peräänny rauhallisesti. Poista sivuhistoria ja heitä puhelin jokeen.",
-            "Älä tee äkillisiä liikkeitä.",
-            "Viha ei häviä. Se vaihtaa vain kohdetta.",
-            "Btw mulla on alkoholiongelma.",
-            "Nyökkää kohteliaasti, vaikka et ymmärtäisi motiiveja.",
-            "Tiedän missä asut. Tiedän myös autosi rekisterinumeron.",
-            "Pidä rauhallinen ääni ja lopeta änkytys. Epävarmuuden voi haistaa.",
-            "Pelkäät tyttöjä.",
-            "Jos et ole saanut videota siitä, miten punainen auto parkkeerataan, älä parkkeeraa.",
-            "Tiedätkö, miten tuulilasista saa vedet pois?",
-            "Tämä linkki asensi laitteellesi viruksen.",
-            "Huonoa makua ei voi parantaa. Se on vain myönnettävä ja hyväksyttävä.",
-            "titsu.",
-            "Sinulla on iso otsa.",
-            "Aurajoki virtaa Turun läpi niin hitaasti, että se on enemmänkin pitkä lätäkkö kuin joki.",
-            "Sinussa on potentiaalia.",
-            "Tiedoksesi, että pystyn muokkaamaan sivustoa ja sen toimintaa ihan milloin vain.",
-            "Mitä vähemmän siinä on sinulle järkeä, sitä paremmin se on muille ymmärrettävissä.",
-            "Analyysi osoittaa, että sinusta on enemmän haittaa kuin hyötyä.",
-            "Napoleonia vastaan taistelleet sotilaat eivät koskaan nähneet Eiffel-tornia, koska se rakennettiin vasta myöhemmin."
-        ];
+const instructions = [
+    "Tarjoa siemeniä ennen kuin tarjoat mielipiteitä.",
+    "Älä mainitse sanaa \"rauhoitu\". Se pahentaa tilannetta.",
+    "Älä. Koske. Hätävarastoon.",
+    "Pakkaa tavarasi ja peräänny rauhallisesti. Poista sivuhistoria ja heitä puhelin jokeen.",
+    "Älä tee äkillisiä liikkeitä.",
+    "Kiedo päällesi vain pitkä takki ja mene puskaan.",
+    "Viha ei häviä. Se vaihtaa vain kohdetta.",
+    "Mulla on alkoholiongelma.",
+    "Nyökkää kohteliaasti, vaikka et ymmärtäisi.",
+    "Tiedän missä asut. Tiedän myös missä perheesi asuu.",
+    "Jos käytät Android puhelinta, on ihmisarvosi automaattisesti pienempi.", 
+    "Suutelen omaa peilikuvaani joka kerta kun käyn vessassa.",
+    "Minulla on Jack ja Jenny. 10000E parkkipaikalla laukussa. Huomenna"
+    "Pidä rauhallinen ääni ja lopeta änkytys. Epävarmuuden voi haistaa.",
+    "Pelkäät tyttöjä.",
+    "Jos et ole saanut videota siitä, miten punainen auto parkkeerataan, älä parkkeeraa.",
+    "Kysymys, miten tuulilasista saa vedet pois?",
+    "Tämä asensi laitteellesi viruksen.",
+    "Huonoa makua ei voi parantaa. Se on vain myönnettävä ja hyväksyttävä.",
+    "titsu.",
+    "Sinulla on iso otsa.",
+    "Aurajoki virtaa Turun läpi niin hitaasti, että se on enemmänkin pitkä lätäkkö kuin joki.",
+    "Sinussa on potentiaalia.",
+    "Tiedoksesi, että pystyn muokkaamaan sivustoa ja sen toimintaa ihan milloin vain.",
+    "Mitä vähemmän siinä on sinulle järkeä, sitä paremmin se on muille ymmärrettävissä.",
+    "Analyysi osoittaa, että sinusta on enemmän haittaa kuin hyötyä.",
+    "Napoleonia vastaan taistelleet sotilaat eivät koskaan nähneet Eiffel-tornia, koska se rakennettiin vasta myöhemmin."
+];
 
-        const surpriseGifs = [
-            "./giphy-shy.gif",
-            "./giphy-stupid.gif"
-        ];
+const surpriseGifs = [
+    "giphy-shy.gif",
+    "giphy-stupid.gif"
+];
 
-        const instructionButton =
-            document.getElementById("instructionButton");
+const instructionButton =
+    document.getElementById("instructionButton");
 
-        const emergencyButton =
-            document.getElementById("emergencyButton");
+const emergencyButton =
+    document.getElementById("emergencyButton");
 
-        const instructionBox =
-            document.getElementById("instruction");
+const instructionBox =
+    document.getElementById("instruction");
 
-        const countBox =
-            document.getElementById("count");
+const countBox =
+    document.getElementById("count");
 
-        const surpriseOverlay =
-            document.getElementById("surpriseOverlay");
+const surpriseOverlay =
+    document.getElementById("surpriseOverlay");
 
-        const surpriseImage =
-            document.getElementById("surpriseImage");
+const surpriseImage =
+    document.getElementById("surpriseImage");
 
-        const emergencyOverlay =
-            document.getElementById("emergencyOverlay");
+const emergencyOverlay =
+    document.getElementById("emergencyOverlay");
 
-        const emergencyImage =
-            document.getElementById("emergencyImage");
+const emergencyImage =
+    document.getElementById("emergencyImage");
 
-        let count = 0;
-        let surpriseTimer;
-        let emergencyTimer;
+let count = 0;
+let surpriseTimer = null;
+let emergencyTimer = null;
 
-        function getRandomItem(array) {
-            const randomIndex =
-                Math.floor(Math.random() * array.length);
+function getRandomItem(array) {
+    const randomIndex =
+        Math.floor(Math.random() * array.length);
 
-            return array[randomIndex];
-        }
+    return array[randomIndex];
+}
 
-        function restartGif(imageElement, filePath) {
-            imageElement.src = "";
+function hideSurprise() {
+    clearTimeout(surpriseTimer);
+    surpriseOverlay.style.display = "none";
+    surpriseImage.removeAttribute("src");
+}
 
-            setTimeout(function () {
-                imageElement.src =
-                    filePath + "?time=" + Date.now();
-            }, 20);
-        }
+function hideEmergency() {
+    clearTimeout(emergencyTimer);
+    emergencyOverlay.style.display = "none";
+}
 
-        function hideSurprise() {
-            clearTimeout(surpriseTimer);
-            surpriseOverlay.style.display = "none";
-        }
+function showSurpriseGif() {
+    clearTimeout(surpriseTimer);
 
-        function hideEmergency() {
-            clearTimeout(emergencyTimer);
-            emergencyOverlay.style.display = "none";
-        }
+    const selectedGif = getRandomItem(surpriseGifs);
 
-        function showSurpriseGif() {
-            const selectedGif =
-                getRandomItem(surpriseGifs);
+    console.log("Ladataan yllätys-GIF:", selectedGif);
 
-            surpriseImage.onerror = function () {
-                instructionBox.textContent =
-                    "GIF-tiedostoa ei löytynyt: " + selectedGif;
+    surpriseImage.onload = function () {
+        console.log("Yllätys-GIF ladattu:", selectedGif);
+    };
 
-                hideSurprise();
-            };
+    surpriseImage.onerror = function () {
+        console.error("GIF ei latautunut:", selectedGif);
 
-            restartGif(surpriseImage, selectedGif);
+        hideSurprise();
 
-            surpriseOverlay.style.display = "flex";
+        instructionBox.textContent =
+            "GIF-tiedostoa ei löytynyt: " + selectedGif;
+    };
 
-            instructionBox.textContent =
-                "ERIKOISTAPAHTUMA HAVAITTU";
+    surpriseImage.src =
+        selectedGif + "?v=" + Date.now();
 
-            surpriseTimer = setTimeout(function () {
-                hideSurprise();
-            }, 3000);
-        }
+    surpriseOverlay.style.display = "flex";
 
-        function giveInstruction() {
-            count++;
-            countBox.textContent = count;
+    instructionBox.textContent =
+        "ERIKOISTAPAHTUMA HAVAITTU";
 
-            /*
-             * Yllätys-GIF:n todennäköisyys on 10 %.
-             * Testaamista varten vaihda 0.10 arvoksi 1.
-             */
-            const showSurprise =
-                Math.random() < 0.10;
+    surpriseTimer = setTimeout(function () {
+        hideSurprise();
+    }, 3000);
+}
 
-            if (showSurprise) {
-                showSurpriseGif();
-                return;
-            }
+function giveInstruction() {
+    count++;
+    countBox.textContent = count;
 
-            instructionBox.textContent =
-                getRandomItem(instructions);
-        }
+    /*
+     * Testauksen aikana yllätys näkyy joka painalluksella.
+     */
+    const showSurprise = true;
 
-     function activateEmergency() {
+    if (showSurprise) {
+        showSurpriseGif();
+        return;
+    }
 
+    instructionBox.textContent =
+        getRandomItem(instructions);
+}
+
+function activateEmergency() {
     clearTimeout(emergencyTimer);
 
-    restartGif(
-        emergencyImage,
-        "./marcus-the-worm-robert-help.gif"
-    );
+    emergencyImage.src =
+        "marcus-the-worm-robert-help.gif?v=" + Date.now();
 
     emergencyOverlay.style.display = "flex";
 
@@ -348,33 +349,33 @@
     }, 3000);
 }
 
-        instructionButton.addEventListener(
-            "click",
-            giveInstruction
-        );
+instructionButton.addEventListener(
+    "click",
+    giveInstruction
+);
 
-        emergencyButton.addEventListener(
-            "click",
-            activateEmergency
-        );
+emergencyButton.addEventListener(
+    "click",
+    activateEmergency
+);
 
-        surpriseOverlay.addEventListener(
-            "click",
-            hideSurprise
-        );
+surpriseOverlay.addEventListener(
+    "click",
+    hideSurprise
+);
 
-        emergencyOverlay.addEventListener(
-            "click",
-            hideEmergency
-        );
+emergencyOverlay.addEventListener(
+    "click",
+    hideEmergency
+);
 
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-                hideSurprise();
-                hideEmergency();
-            }
-        });
-    </script>
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        hideSurprise();
+        hideEmergency();
+    }
+});
+</script>
 
 </body>
 </html>
