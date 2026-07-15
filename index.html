@@ -325,7 +325,7 @@ function giveInstruction() {
     /*
      * Testauksen aikana yllätys näkyy joka painalluksella.
      */
-    const showSurprise = true;
+    const showSurprise = Math.random() < 0.10;
 
     if (showSurprise) {
         showSurpriseGif();
