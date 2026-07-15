@@ -1,259 +1,379 @@
+```html
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>have a wonderful day u f</title>
+    <title>Have a wonderful day</title>
 
-<style>
-body {
-    background: #080808;
-    color: #eeeeee;
-    font-family: "Courier New", monospace;
-    text-align: center;
-    padding: 20px;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-.container {
-    max-width: 700px;
-    margin: auto;
-    background: #111;
-    border: 3px solid #ffb6d9;
-    padding: 25px;
-    box-shadow: 0 0 25px #ffb6d9;
-}
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: #080808;
+            color: #eeeeee;
+            font-family: "Courier New", monospace;
+            text-align: center;
+        }
 
-h1 {
-    color: #ffb6d9;
-    text-shadow: 0 0 12px #ffb6d9;
-}
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 25px;
+            background: #111111;
+            border: 3px solid #ffb6d9;
+            box-shadow: 0 0 25px #ffb6d9;
+        }
 
-.warning {
-    color: orange;
-    font-size: 20px;
-    font-weight: bold;
-}
+        h1 {
+            color: #ffb6d9;
+            text-shadow: 0 0 12px #ffb6d9;
+        }
 
-img {
-    max-width: 100%;
-    margin: 20px 0;
-    border: 3px solid white;
-}
+        .warning {
+            color: orange;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-button {
-    background: #ff8fc7;
-    color: #111;
-    border: none;
-    padding: 15px 25px;
-    margin: 10px;
-    font-size: 18px;
-    font-family: "Courier New", monospace;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 0 12px #ffb6d9;
-    transition: 0.2s;
-}
+        .main-gif {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border: 3px solid white;
+        }
 
-button:hover {
-    background: #ffb6d9;
-    box-shadow: 0 0 20px #ffb6d9;
-    transform: scale(1.03);
-}
+        button {
+            margin: 10px;
+            padding: 15px 25px;
+            background: #ff8fc7;
+            color: #111111;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 12px #ffb6d9;
+            font-family: "Courier New", monospace;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition:
+                background 0.2s,
+                box-shadow 0.2s,
+                transform 0.2s;
+        }
 
-#instruction {
-    margin-top: 25px;
-    min-height: 70px;
-    color: #00ff00;
-    font-size: 18px;
-}
+        button:hover {
+            background: #ffb6d9;
+            box-shadow: 0 0 20px #ffb6d9;
+            transform: scale(1.03);
+        }
 
-.counter {
-    color: gray;
-    margin-top: 20px;
-}
+        button:active {
+            transform: scale(0.98);
+        }
 
+        #instruction {
+            min-height: 70px;
+            margin-top: 25px;
+            color: #00ff00;
+            font-size: 18px;
+        }
 
-/* Halaus-GIF koko ruudulle */
-#emergencyGif {
-    display: none;
-    position: fixed;
-    z-index: 9998;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    justify-content: center;
-    align-items: center;
-}
+        .counter {
+            margin-top: 20px;
+            color: gray;
+        }
 
-#emergencyGif img {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    border: none;
-    object-fit: contain;
-}
+        /*
+         * Koko ruudun GIF-näkymät.
+         */
+        .gif-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Satunnainen yllätys-GIF koko ruudulle */
-#randomGifOverlay {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    justify-content: center;
-    align-items: center;
-}
+        .gif-overlay img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            border: none;
+            object-fit: contain;
+        }
 
-#randomGifImage {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    border: none;
-    object-fit: contain;
-}
-</style>
+        #emergencyGif {
+            z-index: 9998;
+        }
 
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 18px;
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                margin: 12px 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <main class="container">
+        <h1>Heippa</h1>
 
-<h1>Heippa</h1>
+        <p class="warning">
+            Sait linkistä viruksen
+        </p>
 
-<p class="warning">
-Sait linkistä viruksen
-</p>
+        <img
+            class="main-gif"
+            src="./giphy.gif"
+            alt="Vihainen hamsteri"
+        >
 
-<img src="giphy.gif" alt="Angry Hamster">
+        <button id="instructionButton" type="button">
+            ANNA OHJE
+        </button>
 
-<br>
+        <button id="emergencyButton" type="button">
+            AKTIVOI HALAUS
+        </button>
 
-<button onclick="giveInstruction()">
-ANNA OHJE
-</button>
+        <div id="instruction" aria-live="polite">
+            Paina nappia vastaanottaaksesi ohje
+        </div>
 
-<button onclick="activateEmergency()">
-AKTIVOI HALAUS
-</button>
+        <div class="counter">
+            Vastaanotettuja ohjeita:
+            <span id="count">0</span>
+        </div>
+    </main>
 
-<div id="instruction">
-Paina nappia vastaanottaaksesi ohje
-</div>
+    <!-- Halaus-GIF -->
+    <div id="emergencyGif" class="gif-overlay">
+        <img
+            id="emergencyGifImage"
+            src="./marcus-the-worm-robert-help.gif"
+            alt="Halaus-GIF"
+        >
+    </div>
 
-<div class="counter">
-Vastaanotettuja ohjeita: <span id="count">0</span>
-</div>
-<img id="surpriseGif"
-     src=""
-     alt="Yllätys-GIF"
-     style="display:none; max-width:100%; margin-top:20px;">
-</div>
+    <!-- Satunnainen yllätys-GIF -->
+    <div id="randomGifOverlay" class="gif-overlay">
+        <img
+            id="randomGifImage"
+            src=""
+            alt="Satunnainen yllätys-GIF"
+        >
+    </div>
 
+    <script>
+        "use strict";
 
-<!-- Piilotettu yllätys-GIF -->
+        const instructions = [
+            "Tarjoa siemeniä ennen kuin tarjoat mielipiteitä.",
+            "Älä mainitse sanaa \"rauhoitu\". Se pahentaa tilannetta.",
+            "Älä. Koske. Hätäsiemenvarastoon.",
+            "Pakkaa tavarasi ja peräänny rauhallisesti. Poista sivuhistoria ja heitä puhelin jokeen.",
+            "Älä tee äkillisiä liikkeitä äläkä lausu huonoja vitsejä.",
+            "Viha ei häviä. Se vaihtaa vain kohdetta.",
+            "Nyökkää kohteliaasti, vaikka et ymmärtäisi motiiveja.",
+            "Tiedän missä asut. Tiedän myös autosi rekisterinumeron.",
+            "Pidä rauhallinen ääni ja lopeta änkytys. Epävarmuuden voi haistaa.",
+            "Pelkäät tyttöjä.",
+            "Jos et ole saanut videota siitä, miten punainen auto parkkeerataan, älä parkkeeraa.",
+            "Tiedätkö, miten tuulilasista saa vedet pois?",
+            "Tämä linkki asensi laitteellesi viruksen.",
+            "Huonoa makua ei voi parantaa. Se on vain myönnettävä ja hyväksyttävä.",
+            "SINULLA on iso otsa.",
+            "Poikkeama havaittu: käyttäydyit järkevästi.",
+            "Aurajoki virtaa Turun läpi niin hitaasti, että se on enemmänkin pitkä lätäkkö kuin joki.",
+            "Sinussa on potentiaalia.",
+            "Tiedoksesi, että pystyn muokkaamaan sivustoa ja sen toimintaa ihan milloin vain.",
+            "Mitä vähemmän siinä on sinulle järkeä, sitä paremmin se on muille ymmärrettävissä.",
+            "Analyysi osoittaa, että sinusta on enemmän haittaa kuin hyötyä.",
+            "Napoleonia vastaan taistelleet sotilaat eivät koskaan nähneet Eiffel-tornia, koska se rakennettiin vasta myöhemmin."
+        ];
 
-<div id="emergencyGif">
-    <img src="marcus-the-worm-robert-help.gif" alt="Halaus-GIF">
-</div>
+        /*
+         * GIF-tiedostojen pitää olla samassa kansiossa
+         * tämän HTML-tiedoston kanssa.
+         */
+        const surpriseGifs = [
+            "./giphy-shy.gif",
+            "./giphy-stupid.gif",
+            "./giphy-yes.gif"
+        ];
 
-<div id="randomGifOverlay">
-    <img id="randomGifImage" alt="">
-</div>
+        const instructionButton =
+            document.getElementById("instructionButton");
 
+        const emergencyButton =
+            document.getElementById("emergencyButton");
 
-<script>
+        const instructionBox =
+            document.getElementById("instruction");
 
-const instructions = [
-"Tarjoa siemeniä ennen kuin tarjoat mielipiteitä.",
-"Älä mainitse sanaa \"rauhoitu\". Se pahentaa tilannetta.",
-"Älä. Koske. Hätäsiemenvarastoon.",
-"Pakkaa tavarasi ja peräänny rauhallisesti. Poista sivuhistoria ja heitä puhelin jokeen.",
-"Älä tee äkillisiä liikkeitä, äläkä lausu huonoja vitsejä.",
-"Viha ei häviä. Se vaihtaa vain kohdetta.",
-"Nyökkää kohteliaasti, vaikka et ymmärtäisi motiiveja.",
-"Tiedän missä asut. Tiedän myös autosi rekisterinumeron",
-"Pidä rauhallinen ääni ja lopeta änkytys, epävarmuuden voi haistaa.",
-"Pelkäät tyttöjä.",
-"Jos et ole saanut videota, miten parkkeerata punainen auto, älä parkkeeraa.",
-"Tiedätkö miten tuulilasista saa vedet pois?",
-"Tämä linkki asensi laitteellisi viruksen.",
-"Huonoa makua ei voi parantaa, se on vain myönnettävä ja hyväksyttävä.",
-"SINULLA on iso otsa.",
-"Poikkeama havaittu: käyttäydyit järkevästi.",
-"Aurajoki virtaa Turun läpi niin hitaasti, että se on olevan enemmänkin pitkä lätäkkö kuin joki.",
-"Sinussa on potentiaalia.",
-"Tiedoksesi, että pystyn muokkaamaan sivustoa ja sen toimintaa ihan milloin vain.",
-"Mitä vähemmän siinä on järkeä sulle, niin sitä paremmin se on muilla ymmärrettävissä.",
-"Analyysi osoittaa, että sinusta on enemmän haittaa, kuin hyötyä.",
-"Napoleonia vastaan taistelleet sotilaat eivät koskaan nähneet Eiffel-tornia. D44 koska se rakennettiin vasta myöhemmin."
+        const countBox =
+            document.getElementById("count");
 
+        const randomGifOverlay =
+            document.getElementById("randomGifOverlay");
 
+        const randomGifImage =
+            document.getElementById("randomGifImage");
 
-];
+        const emergencyGif =
+            document.getElementById("emergencyGif");
 
-const surpriseGifs = [
-    "giphy-shy.gif",
-    "giphy-stupid.gif"
-];
+        const emergencyGifImage =
+            document.getElementById("emergencyGifImage");
 
-let count = 0;
+        let count = 0;
+        let randomGifTimer = null;
+        let emergencyGifTimer = null;
 
-function giveInstruction() {
-    const instructionBox = document.getElementById("instruction");
-    const overlay = document.getElementById("randomGifOverlay");
-    const image = document.getElementById("randomGifImage");
+        /*
+         * Esiladataan GIF-tiedostot, jotta ne näkyvät
+         * nopeammin ensimmäisellä näyttökerralla.
+         */
+        surpriseGifs.forEach(function (gifPath) {
+            const preloadImage = new Image();
+            preloadImage.src = gifPath;
+        });
 
-    // 5 % mahdollisuus näyttää yllätys-GIF.
-    if (Math.random() < 0.05) {
-        const randomGif =
-            surpriseGifs[Math.floor(Math.random() * surpriseGifs.length)];
+        function getRandomItem(items) {
+            const randomIndex =
+                Math.floor(Math.random() * items.length);
 
-        // Tyhjentäminen käynnistää GIF-animaation uudelleen.
-        image.src = "";
-        image.src = randomGif;
+            return items[randomIndex];
+        }
 
-        overlay.style.display = "flex";
-        instructionBox.textContent = "ERIKOISTAPAHTUMA HAVAITTU";
+        function restartGif(imageElement, gifPath) {
+            /*
+             * Aikaleima pakottaa selaimen lataamaan GIF-animaation
+             * uudelleen alusta.
+             */
+            imageElement.src =
+                gifPath + "?restart=" + Date.now();
+        }
 
-        setTimeout(function () {
-            overlay.style.display = "none";
-            image.src = "";
-        }, 2000);
-    } else {
-        const random =
-            Math.floor(Math.random() * instructions.length);
+        function hideRandomGif() {
+            randomGifOverlay.style.display = "none";
+            randomGifImage.removeAttribute("src");
+        }
 
-        instructionBox.textContent = instructions[random];
-    }
+        function showRandomGif() {
+            const randomGif = getRandomItem(surpriseGifs);
 
-    count++;
-    document.getElementById("count").textContent = count;
-}
+            clearTimeout(randomGifTimer);
 
-function activateEmergency() {
+            restartGif(randomGifImage, randomGif);
 
-    let gif = document.getElementById("emergencyGif");
+            randomGifOverlay.style.display = "flex";
+            instructionBox.textContent =
+                "ERIKOISTAPAHTUMA HAVAITTU";
 
-    gif.style.display = "flex";
+            randomGifTimer = setTimeout(function () {
+                hideRandomGif();
+            }, 2000);
+        }
 
-    setTimeout(function() {
-        gif.style.display = "none";
-    }, 3000);
+        function giveInstruction() {
+            /*
+             * 5 prosentin mahdollisuus näyttää yllätys-GIF.
+             * Testaamista varten voit vaihtaa arvoksi esimerkiksi 0.5.
+             */
+            const showSurprise = Math.random() < 0.05;
 
-}
+            if (showSurprise) {
+                showRandomGif();
+            } else {
+                instructionBox.textContent =
+                    getRandomItem(instructions);
+            }
 
-</script>
+            count++;
+            countBox.textContent = count;
+        }
+
+        function hideEmergencyGif() {
+            emergencyGif.style.display = "none";
+        }
+
+        function activateEmergency() {
+            clearTimeout(emergencyGifTimer);
+
+            restartGif(
+                emergencyGifImage,
+                "./marcus-the-worm-robert-help.gif"
+            );
+
+            emergencyGif.style.display = "flex";
+
+            emergencyGifTimer = setTimeout(function () {
+                hideEmergencyGif();
+            }, 3000);
+        }
+
+        instructionButton.addEventListener(
+            "click",
+            giveInstruction
+        );
+
+        emergencyButton.addEventListener(
+            "click",
+            activateEmergency
+        );
+
+        /*
+         * Koko ruudun GIF-kuvan voi sulkea myös klikkaamalla.
+         */
+        randomGifOverlay.addEventListener(
+            "click",
+            hideRandomGif
+        );
+
+        emergencyGif.addEventListener(
+            "click",
+            hideEmergencyGif
+        );
+
+        /*
+         * Escape-näppäin sulkee avoimen GIF-näkymän.
+         */
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                hideRandomGif();
+                hideEmergencyGif();
+            }
+        });
+    </script>
 
 </body>
 </html>
-
+```
