@@ -332,25 +332,21 @@
                 getRandomItem(instructions);
         }
 
-        function activateEmergency() {
-            emergencyImage.onerror = function () {
-                instructionBox.textContent =
-                    "Halaus-GIF-tiedostoa ei löytynyt.";
+     function activateEmergency() {
 
-                hideEmergency();
-            };
+    clearTimeout(emergencyTimer);
 
-            restartGif(
-                emergencyImage,
-                "./marcus-the-worm-robert-help.gif"
-            );
+    restartGif(
+        emergencyImage,
+        "./marcus-the-worm-robert-help.gif"
+    );
 
-            emergencyOverlay.style.display = "flex";
+    emergencyOverlay.style.display = "flex";
 
-            emergencyTimer = setTimeout(function () {
-                hideEmergency();
-            }, 3000);
-        }
+    emergencyTimer = setTimeout(function () {
+        hideEmergency();
+    }, 3000);
+}
 
         instructionButton.addEventListener(
             "click",
